@@ -1,8 +1,8 @@
 export class User {
-    email: string;
+    username: string;
     password: string;
 
-    hasEmail() {
-        return this.email !== '';
+    hasUsername() {
+        return this.username !== '';
     }
 }
