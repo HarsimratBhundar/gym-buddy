@@ -14,8 +14,8 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   isLoggingIn = true;
   user: User;
-  @ViewChild("password") password: ElementRef;
-  @ViewChild("confirmPassword") confirmPassword: ElementRef;
+  password: ElementRef;
+  confirmPassword: ElementRef;
 
   constructor(private page: Page, private userService: UserService, private router: Router) {
       this.page.actionBarHidden = true;
@@ -27,8 +27,8 @@ export class LoginComponent {
   }
 
   submit() {
-      if (!this.user.email || !this.user.password) {
-          this.alert("Please provide both an email address and password.");
+      if (!this.user.username || !this.user.password) {
+          this.alert("Please provide both an username address and password.");
           return;
       }
 
@@ -67,8 +67,8 @@ export class LoginComponent {
   forgotPassword() {
       // prompt({
       //     title: "Forgot Password",
-      //     message: "Enter the email address you used to register for APP NAME to reset your password.",
-      //     inputType: "email",
+      //     message: "Enter the username address you used to register for APP NAME to reset your password.",
+      //     inputType: "username",
       //     defaultText: "",
       //     okButtonText: "Ok",
       //     cancelButtonText: "Cancel"
@@ -95,7 +95,7 @@ export class LoginComponent {
 
   alert(message: string) {
       return alert({
-          title: "APP NAME",
+          title: "GYM BUDDY",
           okButtonText: "OK",
           message: message
       });

@@ -11,7 +11,7 @@ export class UserService {
         
     }
 
-    resetPassword(email) {
+    resetPassword(username) {
     }
 
     handleErrors(error: Error) {
