@@ -43,9 +43,8 @@ def register(request):
         return Response({'error': 'Username has already been taken'},
                         status=HTTP_400_BAD_REQUEST)
 
-    user = User.objects.create_user(username='john',
-                                 email='jlennon@beatles.com',
-                                 password='glass onion')
+    user = User.objects.create_user(username=username,
+                                 password=password)
     token, _ = Token.objects.get_or_create(user=user)
     return Response({'token': token.key},
                     status=HTTP_200_OK)
