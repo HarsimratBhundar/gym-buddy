@@ -129,3 +129,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+
+ALLOWED_HOSTS = ['gym-buddy-backend-api.herokuapp.com']
