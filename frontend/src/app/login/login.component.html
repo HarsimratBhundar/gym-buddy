@@ -1,0 +1,25 @@
+<FlexboxLayout class="page">
+    <StackLayout class="form">
+        <Image class="logo" src="~/app/shared/images/logo.png"></Image>
+        <Label class="header" text="GYM BUDDY"></Label>
+        <StackLayout class="input-field">
+                <TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
+                <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+        <StackLayout class="input-field">
+          <TextField class="input" hint="Password" secure="true"></TextField>
+          <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+        <StackLayout *ngIf="!isLoggingIn" class="input-field">
+            <TextField class="input" hint="Confirm Password" secure="true"></TextField>
+            <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+        <Button [text]="isLoggingIn ? 'Log In' : 'Sign Up'" (tap)="submit()" class="btn btn-primary"></Button>
+    </StackLayout>
+    <Label (tap)="toggleForm()">
+        <FormattedString class="login-label sign-up-label">
+            <Span [text]="isLoggingIn ? 'Don’t have an account?' : 'Back to Login'"></Span>
+            <Span [text]="isLoggingIn ? ' Sign up' : ''" clatss="bold"></Span>
+        </FormattedString>
+    </Label>
+  </FlexboxLayout>
