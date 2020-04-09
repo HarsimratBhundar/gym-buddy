@@ -1,14 +1,44 @@
 import { Injectable } from "@angular/core";
 import { User } from "../model/user.model";
+import { HttpClient } from "@angular/common/http";
+import {
+    setString,
+    remove
+} from "tns-core-modules/application-settings";
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
-    register(user: User) {
 
+    constructor(private httpClient: HttpClient) {
+        remove("user"); // removes access token when initalized (trying to create artifical session state)
+    }
+    register(user: User) {
+        return this.httpClient.post('/auth/register', {
+            username: user.username,
+            password: user.password,
+        }).pipe(
+            map((res) => {
+                setString("user", JSON.stringify(Object.assign(res, user)));
+                return true;
+            })
+        )
     }
 
     login(user: User) {
-        
+        return this.httpClient.post('/auth/login', {
+            username: user.username,
+            password: user.password,
+        }).pipe(
+            map((res) => {
+                setString("user", JSON.stringify(Object.assign(res, user)));
+                return true;
+            })
+        )
+    }
+
+    logout() {
+        remove("user");
     }
 
     resetPassword(username) {
