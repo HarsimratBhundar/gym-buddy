@@ -28,7 +28,7 @@ export class LoginComponent {
 
   submit() {
       if (!this.user.username || !this.user.password) {
-          this.alert("Please provide both an username address and password.");
+          this.alert("Please provide valid username and password.");
           return;
       }
 
@@ -40,28 +40,42 @@ export class LoginComponent {
   }
 
   login() {
-      // this.userService.login(this.user)
-      //     .then(() => {
-      //         this.router.navigate(["/home"]);
-      //     })
-      //     .catch(() => {
-      //         this.alert("Unfortunately we could not find your account.");
-      //     });
+      this.userService.login(this.user).subscribe(
+          (authenticated) => {
+              if (authenticated) {
+              this.router.navigate(["/home"]);
+              }
+          },
+          (error) => {
+            if (error.status && error.status === 404){
+                this.alert("Invalid credentials");
+            } else {
+                throw error;
+            }
+          }
+      );
   }
 
   register() {
-      // if (this.password != this.confirmPassword) {
-      //     this.alert("Your passwords do not match.");
-      //     return;
-      // }
-      // this.userService.register(this.user)
-      //     .then(() => {
-      //         this.alert("Your account was successfully created.");
-      //         this.isLoggingIn = true;
-      //     })
-      //     .catch(() => {
-      //         this.alert("Unfortunately we were unable to create your account.");
-      //     });
+
+      if (this.password != this.confirmPassword) {
+          this.alert("Your passwords do not match.");
+          return;
+      }
+      this.userService.register(this.user).subscribe(
+        (authenticated) => {
+            if (authenticated) {
+            this.router.navigate(["/home"]);
+            }
+        },
+        (error) => {
+          if (error.status && error.status === 400){
+              this.alert("Username has already been taken");
+          } else {
+              throw error;
+          }
+        }
+    );
   }
 
   forgotPassword() {

@@ -3,11 +3,11 @@
         <Image class="logo" src="~/app/shared/images/logo.png"></Image>
         <Label class="header" text="GYM BUDDY"></Label>
         <StackLayout class="input-field">
-                <TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
+                <TextField class="input" hint="Email" autocorrect="false" autocapitalizationType="none" [(ngModel)]="user.username"></TextField>
                 <StackLayout class="hr-light"></StackLayout>
         </StackLayout>
         <StackLayout class="input-field">
-          <TextField class="input" hint="Password" secure="true"></TextField>
+          <TextField class="input" hint="Password" secure="true" [(ngModel)]="user.password"></TextField>
           <StackLayout class="hr-light"></StackLayout>
         </StackLayout>
         <StackLayout *ngIf="!isLoggingIn" class="input-field">
