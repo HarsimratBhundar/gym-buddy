@@ -7,6 +7,11 @@ import { ItemsComponent } from "./item/items.component";
 import { ItemDetailComponent } from "./item/item-detail.component";
 import { LoginComponent } from './login/login.component';
 import { UserService } from "~/app/shared/service/user.service";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptor } from "~/app/shared/interceptor/auth.interceptor";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { RouteInterceptor } from "~/app/shared/interceptor/route.interceptor";
+import { HomeComponent } from './home/home.component';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -20,16 +25,21 @@ import { UserService } from "~/app/shared/service/user.service";
     ],
     imports: [
         NativeScriptModule,
-        AppRoutingModule
+        AppRoutingModule,
+        HttpClientModule,
+        NativeScriptFormsModule
     ],
     declarations: [
         AppComponent,
         ItemsComponent,
         ItemDetailComponent,
-        LoginComponent
+        LoginComponent,
+        HomeComponent
     ],
     providers: [
-        UserService
+        UserService,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: RouteInterceptor, multi: true },
     ],
     schemas: [
         NO_ERRORS_SCHEMA
