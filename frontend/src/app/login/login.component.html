@@ -11,7 +11,7 @@
           <StackLayout class="hr-light"></StackLayout>
         </StackLayout>
         <StackLayout *ngIf="!isLoggingIn" class="input-field">
-            <TextField class="input" hint="Confirm Password" secure="true"></TextField>
+            <TextField class="input" hint="Confirm Password" secure="true" [(ngModel)]="confirmPassword"></TextField>
             <StackLayout class="hr-light"></StackLayout>
         </StackLayout>
         <Button [text]="isLoggingIn ? 'Log In' : 'Sign Up'" (tap)="submit()" class="btn btn-primary"></Button>

@@ -14,8 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   isLoggingIn = true;
   user: User;
-  password: ElementRef;
-  confirmPassword: ElementRef;
+  confirmPassword: string;
 
   constructor(private page: Page, private userService: UserService, private router: Router) {
       this.page.actionBarHidden = true;
@@ -58,7 +57,7 @@ export class LoginComponent {
 
   register() {
 
-      if (this.password != this.confirmPassword) {
+      if (this.user.password !== this.confirmPassword) {
           this.alert("Your passwords do not match.");
           return;
       }
@@ -96,15 +95,6 @@ export class LoginComponent {
       //             });
       //     }
       // });
-  }
-
-  focusPassword() {
-      this.password.nativeElement.focus();
-  }
-  focusConfirmPassword() {
-      if (!this.isLoggingIn) {
-          this.confirmPassword.nativeElement.focus();
-      }
   }
 
   alert(message: string) {
