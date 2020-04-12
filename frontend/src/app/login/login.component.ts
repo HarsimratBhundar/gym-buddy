@@ -4,6 +4,7 @@ import { alert, prompt } from "tns-core-modules/ui/dialogs";
 import { Page } from "tns-core-modules/ui/page";
 import { UserService } from '~/app/shared/service/user.service';
 import { Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -15,6 +16,8 @@ export class LoginComponent {
   isLoggingIn = true;
   user: User;
   confirmPassword: string;
+
+  processing = false;
 
   constructor(private page: Page, private userService: UserService, private router: Router) {
       this.page.actionBarHidden = true;
@@ -39,7 +42,9 @@ export class LoginComponent {
   }
 
   login() {
-      this.userService.login(this.user).subscribe(
+      this.userService.login(this.user)
+      .pipe(take(1))
+      .subscribe(
           (authenticated) => {
               if (authenticated) {
               this.router.navigate(["/home"]);
@@ -56,12 +61,13 @@ export class LoginComponent {
   }
 
   register() {
-
       if (this.user.password !== this.confirmPassword) {
           this.alert("Your passwords do not match.");
           return;
       }
-      this.userService.register(this.user).subscribe(
+      this.userService.register(this.user)
+      .pipe(take(1))
+      .subscribe(
         (authenticated) => {
             if (authenticated) {
             this.router.navigate(["/home"]);
