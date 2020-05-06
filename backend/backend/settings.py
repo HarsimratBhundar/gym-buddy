@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'user.apps.UserConfig'
 ]
 
 MIDDLEWARE = [
@@ -130,4 +131,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 
-ALLOWED_HOSTS = ['gym-buddy-backend-api.herokuapp.com']
+ALLOWED_HOSTS = ['gym-buddy-backend-api.herokuapp.com', '127.0.0.1']
