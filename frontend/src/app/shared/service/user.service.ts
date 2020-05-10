@@ -6,6 +6,7 @@ import {
     remove
 } from "tns-core-modules/application-settings";
 import { map } from 'rxjs/operators';
+import { UserInfo } from "~/app/shared/model/user-info.model";
 
 @Injectable()
 export class UserService {
@@ -35,6 +36,14 @@ export class UserService {
                 return true;
             })
         )
+    }
+
+    getUserInfo(user: User) {
+
+    }
+
+    setUserInfo(user: User, userInfo: UserInfo) {
+        
     }
 
     logout() {

@@ -4,7 +4,7 @@ import { alert, prompt } from "tns-core-modules/ui/dialogs";
 import { Page } from "tns-core-modules/ui/page";
 import { UserService } from '~/app/shared/service/user.service';
 import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { take, tap, finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -43,7 +43,14 @@ export class LoginComponent {
 
   login() {
       this.userService.login(this.user)
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        tap(() => {
+            this.processing = true;
+        }),
+        finalize(() => {
+            this.processing = false;
+        }))
       .subscribe(
           (authenticated) => {
               if (authenticated) {
@@ -66,7 +73,14 @@ export class LoginComponent {
           return;
       }
       this.userService.register(this.user)
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        tap(() => {
+            this.processing = true;
+        }),
+        finalize(() => {
+            this.processing = false;
+        }))
       .subscribe(
         (authenticated) => {
             if (authenticated) {
