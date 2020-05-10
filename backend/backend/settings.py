@@ -132,3 +132,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 
 ALLOWED_HOSTS = ['gym-buddy-backend-api.herokuapp.com', '127.0.0.1']
+
+if 'DATABASE_URL' in os.environ:
+    import dj_databse_url
+    DATABASES = { 'default': dj_databse_url }
