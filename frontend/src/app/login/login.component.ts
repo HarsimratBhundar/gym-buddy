@@ -4,6 +4,7 @@ import { alert, prompt } from "tns-core-modules/ui/dialogs";
 import { Page } from "tns-core-modules/ui/page";
 import { UserService } from '~/app/shared/service/user.service';
 import { Router } from '@angular/router';
+import { take, tap, finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -14,8 +15,9 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   isLoggingIn = true;
   user: User;
-  password: ElementRef;
-  confirmPassword: ElementRef;
+  confirmPassword: string;
+
+  processing = false;
 
   constructor(private page: Page, private userService: UserService, private router: Router) {
       this.page.actionBarHidden = true;
@@ -40,7 +42,16 @@ export class LoginComponent {
   }
 
   login() {
-      this.userService.login(this.user).subscribe(
+      this.userService.login(this.user)
+      .pipe(
+        take(1),
+        tap(() => {
+            this.processing = true;
+        }),
+        finalize(() => {
+            this.processing = false;
+        }))
+      .subscribe(
           (authenticated) => {
               if (authenticated) {
               this.router.navigate(["/home"]);
@@ -57,12 +68,20 @@ export class LoginComponent {
   }
 
   register() {
-
-      if (this.password != this.confirmPassword) {
+      if (this.user.password !== this.confirmPassword) {
           this.alert("Your passwords do not match.");
           return;
       }
-      this.userService.register(this.user).subscribe(
+      this.userService.register(this.user)
+      .pipe(
+        take(1),
+        tap(() => {
+            this.processing = true;
+        }),
+        finalize(() => {
+            this.processing = false;
+        }))
+      .subscribe(
         (authenticated) => {
             if (authenticated) {
             this.router.navigate(["/home"]);
@@ -96,15 +115,6 @@ export class LoginComponent {
       //             });
       //     }
       // });
-  }
-
-  focusPassword() {
-      this.password.nativeElement.focus();
-  }
-  focusConfirmPassword() {
-      if (!this.isLoggingIn) {
-          this.confirmPassword.nativeElement.focus();
-      }
   }
 
   alert(message: string) {

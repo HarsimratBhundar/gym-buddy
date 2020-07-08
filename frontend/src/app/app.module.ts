@@ -12,6 +12,9 @@ import { AuthInterceptor } from "~/app/shared/interceptor/auth.interceptor";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { RouteInterceptor } from "~/app/shared/interceptor/route.interceptor";
 import { HomeComponent } from './home/home.component';
+import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
+import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
+import { ProfileComponent } from './profile/profile.component';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -27,14 +30,17 @@ import { HomeComponent } from './home/home.component';
         NativeScriptModule,
         AppRoutingModule,
         HttpClientModule,
-        NativeScriptFormsModule
+        NativeScriptFormsModule,
+        NativeScriptUISideDrawerModule
     ],
     declarations: [
         AppComponent,
         ItemsComponent,
         ItemDetailComponent,
         LoginComponent,
-        HomeComponent
+        HomeComponent,
+        AppWrapperComponent,
+        ProfileComponent
     ],
     providers: [
         UserService,

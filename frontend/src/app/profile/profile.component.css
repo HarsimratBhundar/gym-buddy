@@ -1,17 +1,14 @@
 /* Add mobile styles for the component here.  */
 
 
-
 .content-row {
     padding: 10;
-    /* background-color: white; */
-    orientation: horizontal;
 }
 
 .card {
     background-color: white;
     border-radius: 10;
-    orientation: horizontal;
+    orientation: vertical;
     width: 100%;
     min-height: 100;
     padding: 10;

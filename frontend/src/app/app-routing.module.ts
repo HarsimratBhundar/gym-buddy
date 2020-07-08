@@ -6,13 +6,15 @@ import { ItemsComponent } from "./item/items.component";
 import { ItemDetailComponent } from "./item/item-detail.component";
 import { LoginComponent } from "~/app/login/login.component";
 import { HomeComponent } from "~/app/home/home.component";
+import { ProfileComponent } from "~/app/profile/profile.component";
 
 const routes: Routes = [
-    { path: "", redirectTo: "/login", pathMatch: "full" },
+    { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "items", component: ItemsComponent },
     { path: "item/:id", component: ItemDetailComponent },
     { path: "login", component: LoginComponent },
-    { path: "home", component: HomeComponent }
+    { path: "home", component: HomeComponent },
+    { path: "profile", component: ProfileComponent }
 ];
 
 @NgModule({

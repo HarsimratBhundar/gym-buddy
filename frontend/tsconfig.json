@@ -20,7 +20,9 @@
             "*": [
                 "./node_modules/*"
             ]
-        }
+        },
+        "moduleResolution": "node",
+        "resolveJsonModule": true
     },
     "exclude": [
         "node_modules",
